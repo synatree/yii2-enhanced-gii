@@ -525,7 +525,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         if (is_null($tableSchema)) {
             $tableSchema = $this->getTableSchema();
         }
-        if (in_array($attribute, $this->hiddenColumns)) {
+        if (in_array($attribute, $this->hiddenColumns) || in_array($attribute, $tableSchema->primaryKey)) {
             return "['attribute' => '$attribute', 'visible' => false],\n";
         }
         $humanize = Inflector::humanize($attribute, true);
@@ -570,7 +570,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
             $tableSchema = $this->getTableSchema();
         }
 
-        if (in_array($attribute, $this->hiddenColumns)) {
+        if (in_array($attribute, $this->hiddenColumns) || in_array($attribute, $tableSchema->primaryKey)) {
             return "['attribute' => '$attribute', 'visible' => false],\n";
         }
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
@@ -613,7 +613,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         if (is_null($tableSchema)) {
             $tableSchema = $this->getTableSchema();
         }
-        if (in_array($attribute, $this->hiddenColumns)) {
+        if (in_array($attribute, $this->hiddenColumns) || in_array($attribute, $tableSchema->primaryKey)) {
             return "['attribute' => '$attribute', 'visible' => false],\n";
         }
         /* If the column is a primary Key, hide it. */
@@ -818,7 +818,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
         if (is_null($tableSchema)) {
             $tableSchema = $this->getTableSchema();
         }
-        if (in_array($attribute, $this->hiddenColumns)) {
+        if (in_array($attribute, $this->hiddenColumns) || in_array($attribute, $tableSchema->primaryKey)) {
             return "\$form->field($model, '$attribute', ['template' => '{input}'])->textInput(['style' => 'display:none']);";
         }
         $placeholder = Inflector::humanize($attribute, true);

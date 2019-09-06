@@ -34,10 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php if ($generator->pdf): ?>
 <?= "<?= " ?>
             <?= "
-             Html::a('<i class=\"fa glyphicon glyphicon-hand-up\"></i> ' . " . $generator->generateString('PDF') . ", 
+             Html::a('<i class=\"fas fa-file-pdf\"></i> ' . " . $generator->generateString('PDF') . ", 
                 ['pdf', $urlParams],
                 [
-                    'class' => 'btn btn-danger',
+                    'class' => 'btn btn-default',
                     'target' => '_blank',
                     'data-toggle' => 'tooltip',
                     'title' => " . $generator->generateString('Will open the generated PDF file in a new window') . "
