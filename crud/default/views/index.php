@@ -54,7 +54,7 @@ if ($generator->indexWidgetType === 'grid'):
 ?>
 <?= "<?php \n" ?>
     $gridColumn = [
-        ['class' => 'yii\grid\SerialColumn'],
+       
 <?php
     if ($generator->expandable && !empty($fk)):
 ?>

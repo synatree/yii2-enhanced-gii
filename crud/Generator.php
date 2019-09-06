@@ -616,6 +616,11 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         if (in_array($attribute, $this->hiddenColumns)) {
             return "['attribute' => '$attribute', 'visible' => false],\n";
         }
+        /* If the column is a primary Key, hide it. */
+        if( in_array($attribute, $tableSchema->primaryKey))
+        {
+            return "['attribute' => '$attribute', 'visible' => false],\n";
+        }
 //        $humanize = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
