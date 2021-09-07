@@ -1144,7 +1144,8 @@ if (array_key_exists($attribute, $fk) && $attribute) {
         {
             return $modelName::$property;
         }
-        return "fas fa-book-opened";
+        \Yii::error($modelName, $property);
+        return "fas fa-book-open";
     }
 
 }
