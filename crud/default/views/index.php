@@ -19,8 +19,7 @@ echo "<?php\n";
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
-use kartik\export\ExportMenu;
-use <?= $generator->indexWidgetType === 'grid' ? "kartik\\grid\\GridView;" : "yii\\widgets\\ListView;" ?>
+use <?= $generator->indexWidgetType === 'grid' ? "kartik\\dynagrid\\DynaGrid;" : "yii\\widgets\\ListView;" ?>
 
 
 $this->title = <?= ($generator->pluralize) ? $generator->generateString(Inflector::pluralize(Inflector::camel2words($baseModelClass))) : $generator->generateString(Inflector::camel2words($baseModelClass)) ?>;
@@ -53,7 +52,7 @@ $this->registerJs($search);
 if ($generator->indexWidgetType === 'grid'): 
 ?>
 <?= "<?php \n" ?>
-    $gridColumn = [
+    $gridColumns = [
        
 <?php
     if ($generator->expandable && !empty($fk)):
@@ -106,15 +105,23 @@ if ($generator->indexWidgetType === 'grid'):
     endif; 
 ?>
     ?>
-    <?= "<?= " ?>GridView::widget([
-        'dataProvider' => $dataProvider,
-        <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => \$gridColumn,\n" : "'columns' => \$gridColumn,\n"; ?>
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= Inflector::camel2id(StringHelper::basename($generator->modelClass))?>']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="fas fa-book"></span>  ' . Html::encode($this->title),
+    <?= "<?= " ?>DynaGrid::widget([
+        'options' => ['id' => '<?= $inflected = Inflector::camel2id(StringHelper::basename($generator->modelClass)); ?>'],
+        'storage' => 'db',
+        'theme' => 'simple-striped',
+        'showPersonalize' => true,
+        'gridOptions' => [
+            'persistResize' => true,
+            'dataProvider' => $dataProvider,
+            <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel," : '' ?>
+            'pjax' => true,
+            'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= $inflected ?>']],
+            'panel' => [
+                'type' => GridView::TYPE_PRIMARY,
+                'heading' => '<span class="fas fa-book"></span>  ' . Html::encode($this->title),
+            ],
         ],
+        'columns' => $gridColumns
     ]); ?>
 <?php 
 else: 
