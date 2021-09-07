@@ -650,7 +650,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
                     else
                     {return NULL;}
                 },
-                'filterType' => GridView::FILTER_SELECT2,
+                'filterType' => \\kartik\\grid\\GridView::FILTER_SELECT2,
                 'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
@@ -666,7 +666,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
                 'value' => function(\$model){                   
                     return \$model->$rel[7]->$labelCol;                   
                 },
-                'filterType' => GridView::FILTER_SELECT2,
+                'filterType' => \\kartik\\grid\\GridView::FILTER_SELECT2,
                 'filter' => \\yii\\helpers\\ArrayHelper::map(\\$this->nsModel\\$rel[1]::find()->asArray()->all(), '{$rel[self::REL_PRIMARY_KEY]}', '$labelCol'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
