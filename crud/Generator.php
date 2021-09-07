@@ -1137,15 +1137,14 @@ if (array_key_exists($attribute, $fk) && $attribute) {
     {
 
         $property = $this->iconProperty;
-        if( substr($modelName,0,1) != '\\')
-        {
-            $modelName = '\\' .$modelName;
-        }
+
         if(! class_exists($modelName))
         {
-           
             $modelName = '\\' . $this->nsModel . '\\' . $modelName;
-
+        }
+        elseif( $modelName[0] != '\\')
+        {
+            $modelName = '\\' . $modelName;
         }
         
         if( isset($modelName::$property))
