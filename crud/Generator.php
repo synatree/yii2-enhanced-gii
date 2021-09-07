@@ -1135,11 +1135,15 @@ if (array_key_exists($attribute, $fk) && $attribute) {
 
     public function generateIconClass($modelName)
     {
+
         $property = $this->iconProperty;
         if(! class_exists($modelName))
         {
+            Yii::error("Class $modelName couldn't be found");
             $modelName = '\\' . $this->nsModel . '\\' . $modelName;
+
         }
+        Yii::error("$modelName :: $property About to be resolved");
         if( isset($modelName::$property))
         {
             return $modelName::$property;
