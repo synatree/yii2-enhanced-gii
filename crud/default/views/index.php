@@ -61,7 +61,7 @@ if ($generator->indexWidgetType === 'grid'):
             'class' => 'kartik\grid\ExpandRowColumn',
             'width' => '50px',
             'value' => function ($model, $key, $index, $column) {
-                return GridView::ROW_COLLAPSED;
+                return \kartik\grid\GridView::ROW_COLLAPSED;
             },
             'detail' => function ($model, $key, $index, $column) {
                 return Yii::$app->controller->renderPartial('_expand', ['model' => $model]);
@@ -117,7 +117,7 @@ if ($generator->indexWidgetType === 'grid'):
             'pjax' => true,
             'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= $inflected ?>']],
             'panel' => [
-                'type' => GridView::TYPE_PRIMARY,
+                'type' => \kartik\grid\GridView::TYPE_PRIMARY,
                 'heading' => '<span class="fas fa-book"></span>  ' . Html::encode($this->title),
             ],
         ],
