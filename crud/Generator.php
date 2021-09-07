@@ -59,6 +59,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
     public $baseControllerClass = 'yii\web\Controller';
     public $indexWidgetType = 'grid';
     public $relations;
+    public $iconProperty = 'navigationIcon';
 
 
     /**
@@ -1130,6 +1131,16 @@ if (array_key_exists($attribute, $fk) && $attribute) {
         }
 
         return $conditions;
+    }
+
+    public function generateIconClass($modelName)
+    {
+        $property = $this->iconProperty;
+        if( isset($modelName::$property))
+        {
+            return $modelName::$property;
+        }
+        return "fas fa-book-opened";
     }
 
 }

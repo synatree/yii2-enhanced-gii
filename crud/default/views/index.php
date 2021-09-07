@@ -118,7 +118,7 @@ if ($generator->indexWidgetType === 'grid'):
             'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= $inflected ?>']],
             'panel' => [
                 'type' => \kartik\grid\GridView::TYPE_PRIMARY,
-                'heading' => '<span class="fas fa-book"></span>  ' . Html::encode($this->title),
+                'heading' => '<span class="<?= $generator->generateIconClass($generator->modelClass); ?>"></span>  ' . Html::encode($this->title),
             ],
         ],
         'columns' => $gridColumns
