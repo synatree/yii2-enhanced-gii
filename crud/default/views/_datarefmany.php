@@ -26,7 +26,7 @@ use yii\data\ArrayDataProvider;
 <?php endif; ?>
     ]);
     $gridColumns = [
-        ['class' => 'yii\grid\SerialColumn'],
+        ['class' => 'kartik\grid\SerialColumn'],
 <?php 
 if ($tableSchema === false) :
     foreach ($generator->getColumnNames() as $name) {
@@ -47,7 +47,7 @@ endif;
 endforeach;
 endif; ?>
         [
-            'class' => 'yii\grid\ActionColumn',
+            'class' => 'kartik\grid\ActionColumn',
             'controller' => '<?= \yii\helpers\Inflector::camel2id($relations[1])?>'
         ],
     ];

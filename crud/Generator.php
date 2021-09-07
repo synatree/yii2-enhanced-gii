@@ -24,7 +24,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
 
     public $nameAttribute = 'name, title, username';
     public $hiddenColumns = 'id, lock';
-    public $skippedColumns = 'created_at, updated_at, created_by, updated_by, deleted_at, deleted_by, created, modified, deleted';
+    public $skippedColumns = 'createdAt, updatedAt, createdBy, updatedBy, deleted_at, deleted_by, created, modified, deleted';
     public $nsModel = 'app\models';
     public $nsSearchModel = 'app\models';
     public $generateSearchModel;
@@ -38,11 +38,11 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
     public $generateRelations = true;
     public $generateMigrations = true;
     public $optimisticLock = 'lock';
-    public $createdAt = 'created_at';
-    public $updatedAt = 'updated_at';
+    public $createdAt = 'createdAt';
+    public $updatedAt = 'updatedAt';
     public $timestampValue = "new Expression('NOW()')";
-    public $createdBy = 'created_by';
-    public $updatedBy = 'updated_by';
+    public $createdBy = 'createdBy';
+    public $updatedBy = 'updatedBy';
     public $blameableValue = 'Yii::\$app->user->id';
     public $UUIDColumn = 'id';
     public $deletedBy = 'deleted_by';
@@ -819,7 +819,7 @@ if (array_key_exists($attribute, $fk) && $attribute) {
             $tableSchema = $this->getTableSchema();
         }
         if (in_array($attribute, $this->hiddenColumns) || in_array($attribute, $tableSchema->primaryKey)) {
-            return "\$form->field($model, '$attribute', ['template' => '{input}'])->textInput(['style' => 'display:none']);";
+            return "\$form->field($model, '$attribute')->hiddenInput()->label(false)->hint(false);";
         }
         $placeholder = Inflector::humanize($attribute, true);
         if ($tableSchema === false || !isset($tableSchema->columns[$attribute])) {

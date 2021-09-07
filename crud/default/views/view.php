@@ -95,7 +95,7 @@ if ($tableSchema === false) {
 <?= "<?php\n" ?>
 if($provider<?= $rel[1] ?>->totalCount){
     $gridColumn<?= $rel[1] ?> = [
-        ['class' => 'yii\grid\SerialColumn'],
+        ['class' => 'kartik\grid\SerialColumn'],
 <?php
         $relTableSchema = $generator->getDbConnection()->getTableSchema($rel[3]);
         $fkRel = $generator->generateFK($relTableSchema);
