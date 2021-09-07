@@ -96,7 +96,7 @@ if ($generator->indexWidgetType === 'grid'):
             'template' => '{save-as-new} {view} {update} {delete}',
             'buttons' => [
                 'save-as-new' => function ($url) {
-                    return Html::a('<span class="glyphicon glyphicon-copy"></span>', $url, ['title' => 'Save As New']);
+                    return Html::a('<span class="fas fa-copy"></span>', $url, ['title' => 'Save As New']);
                 },
             ],
 <?php endif; ?>
@@ -113,32 +113,7 @@ if ($generator->indexWidgetType === 'grid'):
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-<?= Inflector::camel2id(StringHelper::basename($generator->modelClass))?>']],
         'panel' => [
             'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
-        ],
-<?php if(!$generator->pdf) : ?>
-        'export' => false,
-<?php endif; ?>
-        // your toolbar can include the additional full export menu
-        'toolbar' => [
-            '{export}',
-            ExportMenu::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => $gridColumn,
-                'target' => ExportMenu::TARGET_BLANK,
-                'fontAwesome' => true,
-                'dropdownOptions' => [
-                    'label' => 'Full',
-                    'class' => 'btn btn-default',
-                    'itemsBefore' => [
-                        '<li class="dropdown-header">Export All Data</li>',
-                    ],
-                ],
-<?php if(!$generator->pdf):?>
-                'exportConfig' => [
-                    ExportMenu::FORMAT_PDF => false
-                ]
-<?php endif;?>
-            ]) ,
+            'heading' => '<span class="fas fa-book"></span>  ' . Html::encode($this->title),
         ],
     ]); ?>
 <?php 
