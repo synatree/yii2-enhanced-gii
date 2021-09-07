@@ -1136,6 +1136,10 @@ if (array_key_exists($attribute, $fk) && $attribute) {
     public function generateIconClass($modelName)
     {
         $property = $this->iconProperty;
+        if(! class_exists($modelName))
+        {
+            $modelName = '\\' . $this->nsModel . '\\' . $modelName;
+        }
         if( isset($modelName::$property))
         {
             return $modelName::$property;
