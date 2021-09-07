@@ -1137,18 +1137,22 @@ if (array_key_exists($attribute, $fk) && $attribute) {
     {
 
         $property = $this->iconProperty;
+        if( substr($modelName,0,1) != '\\')
+        {
+            $modelName = '\\' .$modelName;
+        }
         if(! class_exists($modelName))
         {
-            Yii::error("Class $modelName couldn't be found");
+           
             $modelName = '\\' . $this->nsModel . '\\' . $modelName;
 
         }
-        Yii::error("$modelName :: $property About to be resolved");
+        
         if( isset($modelName::$property))
         {
             return $modelName::$property;
         }
-        \Yii::error($modelName, $property);
+        Yii::error("Model $modelName :: $property was unset");
         return "fas fa-book-open";
     }
 
