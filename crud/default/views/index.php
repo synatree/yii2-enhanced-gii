@@ -12,8 +12,8 @@ $tableSchema = $generator->getTableSchema();
 $baseModelClass = StringHelper::basename($generator->modelClass);
 $fk = $generator->generateFK($tableSchema);
 $inflected = Inflector::camel2id(StringHelper::basename($generator->modelClass));
-$singular = $generator->generateString(Inflector::camel2words($baseModelClass));
-$title = ($generator->pluralize) ? $generator->generateString(Inflector::pluralize(Inflector::camel2words($baseModelClass))) : $singular;
+$singular = $inflected;
+$title = ($generator->pluralize) ? Inflector::pluralize($singular) : $singular;
 echo "<?php\n";
 ?>
 
@@ -25,7 +25,7 @@ use yii\helpers\Html;
 use <?= $generator->indexWidgetType === 'grid' ? "kartik\\dynagrid\\DynaGrid;" : "yii\\widgets\\ListView;" ?>
 
 
-$this->title = <?= $title; ?>;
+$this->title = <?= $generator->generateString($title); ?>;
 $this->params['breadcrumbs'][] = $this->title;
 $search = "$('.search-button').click(function(){
 	$('.search-form').toggle(1000);
@@ -65,7 +65,7 @@ $this->registerJs($search);
                     <p class="mt-2">
                         This is where your <?= $title; ?> appear after you have created some. Why not try adding some <?= $title; ?> now?
                     </p><a class="btn btn-link ps-0 btn-sm" href="<?= \yii\helpers\Url::to(['/card/create']); ?>"
-                        target="_blank">Add A <? $singular; ?><span class="fas fa-chevron-right ms-1 fs--2"></span></a>
+                        target="_blank">Add A <?= $singular; ?><span class="fas fa-chevron-right ms-1 fs--2"></span></a>
                 </div>
             </div>
         </div>
