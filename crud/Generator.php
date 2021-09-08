@@ -1147,9 +1147,9 @@ if (array_key_exists($attribute, $fk) && $attribute) {
             $modelName = '\\' . $modelName;
         }
         
-        if( isset($modelName::$property))
+        if( isset($modelName::$$property))
         {
-            return $modelName::$property;
+            return $modelName::$$property;
         }
         Yii::error("Model $modelName :: $property was unset");
         return "fas fa-book-open";
