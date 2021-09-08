@@ -50,7 +50,7 @@ $this->registerJs($search);
         <!--/.bg-holder-->
         <div class="card-body position-relative">
             <div class="lottie float-start" style="width: 150px; height: 150px"
-                data-options='{"path":"theme/tradelines/assets/img/animated-icons/celebration.json"}'></div>
+                data-options='{"path":"theme/tradelines/assets/img/animated-icons/heart.json"}'></div>
 
             <div class="row">
                 <div class="col-lg-8">
