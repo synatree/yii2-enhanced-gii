@@ -11,6 +11,7 @@ $nameAttribute = $generator->getNameAttribute();
 $tableSchema = $generator->getTableSchema();
 $baseModelClass = StringHelper::basename($generator->modelClass);
 $fk = $generator->generateFK($tableSchema);
+$inflected = Inflector::camel2id(StringHelper::basename($generator->modelClass));
 echo "<?php\n";
 ?>
 
@@ -40,12 +41,22 @@ $this->registerJs($search);
     <p>
         <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
 <?php if (!empty($generator->searchModelClass)): ?>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Advance Search')?>, '#', ['class' => 'btn btn-info search-button']) ?>
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Advanced Search')?>, '#', [
+            'class' => 'btn btn-info',
+            'data-bs-target' => '#offcanvasRight_<?=$inflected;?>',
+            'data-bs-toggle' => 'offcanvas',
+            'aria-controls' => 'offcanvasRight_<?=$inflected;?>'
+            ]) ?>
 <?php endif; ?>
     </p>
 <?php if (!empty($generator->searchModelClass)): ?>
-    <div class="search-form" style="display:none">
-        <?= "<?= " ?> $this->render('_search', ['model' => $searchModel]); ?>
+    <div class="offcanvas offcanvas-end" id="offcanvasRight_<?=$inflected;?>" tabindex="-1" aria-labelledby="offcanvasRightLabel_<?=$inflected;?>">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel_<?=$inflected;?>">Advanced Search</h5><button class="btn-close text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <?= "<?= " ?> $this->render('_search', ['model' => $searchModel]); ?>
+        </div>
     </div>
     <?php endif; ?>
 <?php 
@@ -106,7 +117,7 @@ if ($generator->indexWidgetType === 'grid'):
 ?>
     ?>
     <?= "<?= " ?>DynaGrid::widget([
-        'options' => ['id' => '<?= $inflected = Inflector::camel2id(StringHelper::basename($generator->modelClass)); ?>'],
+        'options' => ['id' => '<?= $inflected; ?>'],
         'storage' => 'db',
         'theme' => 'simple-striped',
         'showPersonalize' => true,
