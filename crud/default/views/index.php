@@ -13,7 +13,7 @@ $baseModelClass = StringHelper::basename($generator->modelClass);
 $fk = $generator->generateFK($tableSchema);
 $inflected = Inflector::camel2id(StringHelper::basename($generator->modelClass));
 $singular = $inflected;
-$title = ($generator->pluralize) ? Inflector::pluralize($singular) : $singular;
+$title = ucfirst(($generator->pluralize) ? Inflector::pluralize($singular) : $singular);
 echo "<?php\n";
 ?>
 
@@ -32,25 +32,18 @@ $search = "$('.search-button').click(function(){
 	return false;
 });";
 $this->registerJs($search);
-?>
-<div class="<?= Inflector::camel2id($baseModelClass) ?>-index">
-
-    <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
 <?php if (!empty($generator->searchModelClass)): ?>
-<?= "    <?php " . ($generator->indexWidgetType === 'grid' ? "// " : "") ?>echo $this->render('_search', ['model' => $searchModel]); ?>
-<?php endif; ?>
-
-    <p>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words($baseModelClass)) ?>, ['create'], ['class' => 'btn btn-success']) ?>
-<?php if (!empty($generator->searchModelClass)): ?>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Advanced Search')?>, '#', [
+    $advancedSearchButton = Html::a(<?= $generator->generateString('Advanced Search')?>, '#', [
             'class' => 'btn btn-info',
             'data-bs-target' => '#offcanvasRight_<?=$inflected;?>',
             'data-bs-toggle' => 'offcanvas',
             'aria-controls' => 'offcanvasRight_<?=$inflected;?>'
-            ]) ?>
+            ]);        
+<?php else: ?>
+    $advancedSearchButton = "";
 <?php endif; ?>
-    </p>
+?>
+<div class="<?= Inflector::camel2id($baseModelClass) ?>-index">
     <div class="card mb-3">
         <div class="bg-holder d-none d-lg-block bg-card"
             style="background-image:url(/theme/tradelines/assets/img/icons/spot-illustrations/corner-4.png);"></div>
@@ -151,6 +144,7 @@ if ($generator->indexWidgetType === 'grid'):
             'panel' => [
                 'type' => \kartik\grid\GridView::TYPE_PRIMARY,
                 'heading' => '<span class="<?= $generator->generateIconClass($generator->modelClass); ?>"></span>  ' . Html::encode($this->title),
+                'before' => $advancedSearchButton . '{dynagrid}'
             ],
         ],
         'columns' => $gridColumns
