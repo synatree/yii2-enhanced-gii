@@ -57,7 +57,7 @@ $this->registerJs($search);
                     <h3><?= $title ?> View</h3>
                     <p class="mt-2">
                         This is where your <?= $title; ?> appear after you have created some. Why not try adding some <?= $title; ?> now?
-                    </p><a class="btn btn-link ps-0 btn-sm" href="<?= \yii\helpers\Url::to(["$inflected/create"]); ?>"
+                    </p><a class="btn btn-link ps-0 btn-sm" href="<?= \yii\helpers\Url::to(["/$inflected/create"]); ?>"
                         target="_blank">Add A <?= $singular; ?><span class="fas fa-chevron-right ms-1 fs--2"></span></a>
                 </div>
             </div>
