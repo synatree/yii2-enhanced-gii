@@ -132,6 +132,10 @@ if ($generator->indexWidgetType === 'grid'):
     ?>
     <?= "<?= " ?>DynaGrid::widget([
         'options' => ['id' => '<?= $inflected; ?>'],
+        'matchPanelStyle' => false,
+        'toggleButtonGrid' => [
+            'label' => "<span class='fas fa-cog'></span>",
+        ],
         'storage' => 'db',
         'theme' => 'simple-striped',
         'showPersonalize' => true,
@@ -144,7 +148,7 @@ if ($generator->indexWidgetType === 'grid'):
             'panel' => [
                 'type' => \kartik\grid\GridView::TYPE_PRIMARY,
                 'heading' => '<span class="<?= $generator->generateIconClass($generator->modelClass); ?>"></span>  ' . Html::encode($this->title),
-                'before' => $advancedSearchButton . '{dynagrid}'
+                'before' => $advancedSearchButton . "<div class='float-end'>{dynagrid}</div>",
             ],
         ],
         'columns' => $gridColumns
