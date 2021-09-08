@@ -12,6 +12,8 @@ $tableSchema = $generator->getTableSchema();
 $baseModelClass = StringHelper::basename($generator->modelClass);
 $fk = $generator->generateFK($tableSchema);
 $inflected = Inflector::camel2id(StringHelper::basename($generator->modelClass));
+$singular = $generator->generateString(Inflector::camel2words($baseModelClass));
+$title = ($generator->pluralize) ? $generator->generateString(Inflector::pluralize(Inflector::camel2words($baseModelClass))) : $singular;
 echo "<?php\n";
 ?>
 
@@ -23,7 +25,7 @@ use yii\helpers\Html;
 use <?= $generator->indexWidgetType === 'grid' ? "kartik\\dynagrid\\DynaGrid;" : "yii\\widgets\\ListView;" ?>
 
 
-$this->title = <?= ($generator->pluralize) ? $generator->generateString(Inflector::pluralize(Inflector::camel2words($baseModelClass))) : $generator->generateString(Inflector::camel2words($baseModelClass)) ?>;
+$this->title = <?= $title; ?>;
 $this->params['breadcrumbs'][] = $this->title;
 $search = "$('.search-button').click(function(){
 	$('.search-form').toggle(1000);
@@ -49,6 +51,25 @@ $this->registerJs($search);
             ]) ?>
 <?php endif; ?>
     </p>
+    <div class="card mb-3">
+        <div class="bg-holder d-none d-lg-block bg-card"
+            style="background-image:url(/theme/tradelines/assets/img/icons/spot-illustrations/corner-4.png);"></div>
+        <!--/.bg-holder-->
+        <div class="card-body position-relative">
+            <div class="lottie float-start" style="width: 150px; height: 150px"
+                data-options='{"path":"theme/tradelines/assets/img/animated-icons/celebration.json"}'></div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3><?= $title ?> View</h3>
+                    <p class="mt-2">
+                        This is where your <?= $title; ?> appear after you have created some. Why not try adding some <?= $title; ?> now?
+                    </p><a class="btn btn-link ps-0 btn-sm" href="<?= \yii\helpers\Url::to(['/card/create']); ?>"
+                        target="_blank">Add A <? $singular; ?><span class="fas fa-chevron-right ms-1 fs--2"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php if (!empty($generator->searchModelClass)): ?>
     <div class="offcanvas offcanvas-end" id="offcanvasRight_<?=$inflected;?>" tabindex="-1" aria-labelledby="offcanvasRightLabel_<?=$inflected;?>">
         <div class="offcanvas-header">
