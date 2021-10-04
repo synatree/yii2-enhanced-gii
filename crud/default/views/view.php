@@ -132,6 +132,7 @@ if($provider<?= $rel[1] ?>->totalCount){
 
     </div>
 <?php elseif(empty($rel[2])): ?>
+    <?= "<?php if(\$model->{$name}): ?>" ?>
     <div class="row">
         <h4><?= $rel[1] ?><?= "<?= " ?>' '. Html::encode($this->title) ?></h4>
     </div>
@@ -155,12 +156,13 @@ if($provider<?= $rel[1] ?>->totalCount){
         }
     }
     ?>
-    ];
+    ]
     echo DetailView::widget([
         'model' => $model-><?= $name ?>,
         'attributes' => $gridColumn<?= $rel[1] ?>
     ]);
     ?>
+    <?= "<?php endif; ?>" ?>
 <?php endif; ?>
 <?php endforeach; ?>
 </div>
